@@ -99,7 +99,7 @@ namespace StockWatcher
         private void LoadSetting()
         {
             StockConfig.LoadSetting();
-            maxIndex = StockConfig.StockList.Count - 1;
+            maxIndex = StockConfig.StockList.Count /*- 1*/;
             if (maxIndex <= 0)
             {
                 currentIndex = -1;

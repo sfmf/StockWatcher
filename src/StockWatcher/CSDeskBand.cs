@@ -3,6 +3,7 @@
 // VERSION 3.1
 // LICENSE: https://raw.githubusercontent.com/dsafa/CSDeskBand/master/LICENSE
 #pragma warning disable 1591
+#define DESKBAND_WINFORMS
 namespace CSDeskBand
 {
     using System;

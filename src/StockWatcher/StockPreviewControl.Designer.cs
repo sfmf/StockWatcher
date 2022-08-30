@@ -41,9 +41,9 @@ namespace StockWatcher
             // 
             // labelForStatus
             // 
-            this.labelForStatus.BackColor = System.Drawing.Color.Transparent;
+            this.labelForStatus.BackColor = System.Drawing.Color.Black;
             this.labelForStatus.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelForStatus.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelForStatus.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelForStatus.ForeColor = System.Drawing.Color.White;
             this.labelForStatus.Location = new System.Drawing.Point(0, 0);
             this.labelForStatus.Name = "labelForStatus";
