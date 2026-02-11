@@ -11,7 +11,7 @@ namespace StockWatcher
 {
     [ComVisible(true)]
     [Guid("EFD26D5D-1609-4B8A-B51C-843BB9DFD2BE")]
-    [CSDeskBand.CSDeskBandRegistration(Name = "看盘神器 v1.0", ShowDeskBand = true)]
+    [CSDeskBand.CSDeskBandRegistration(Name = "天气资讯 v1.1", ShowDeskBand = true)]
     public class Deskband : CSDeskBand.CSDeskBandWin
     {
         private static Control _control;

@@ -14,7 +14,7 @@ namespace StockWatcher
         [STAThread]
         public static void Main(string[] args)
         {
-            Console.WriteLine($"Windows 任务栏看盘神器 v1.0");
+            Console.WriteLine($"Windows 天气资讯 v1.1");
             Console.WriteLine($"Email：admin@mruo.com");
             Console.WriteLine();
 
