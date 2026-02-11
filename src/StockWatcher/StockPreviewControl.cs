@@ -72,7 +72,22 @@ namespace StockWatcher
                     else
                     {
                         labelForStatus.Tag = stockModel;
-                        UpdateStatus($"{stockModel.Name} {stockModel.CurrentPrice.ToString("F2")}\r\n{stockModel.PricePercent}{(stockModel.IsUp ? "↑" : "↓")}", stockModel.IsUp ? StockColor.Red : StockColor.Green);
+                        // 计算涨跌额（通过现价和百分比反算前收盘价）
+                        var percent = stockModel.PricePercent;
+                        float changeAmount;
+                        if (Math.Abs(100f + percent) < 0.0001f)
+                        {
+                            // 避免除以零的情况
+                            changeAmount = 0f;
+                        }
+                        else
+                        {
+                            var prevClose = stockModel.CurrentPrice / (1 + percent / 100f);
+                            changeAmount = stockModel.CurrentPrice - prevClose;
+                        }
+                        var changeText = $"{(changeAmount > 0 ? "+" : "")}{changeAmount.ToString("F2")}";
+                        var percentText = $"{(percent > 0 ? "+" : "")}{percent.ToString("F2")}%";
+                        UpdateStatus($"{stockModel.Name} {stockModel.CurrentPrice.ToString("F2")}\r\n{changeText} ({percentText}){(stockModel.IsUp ? "↑" : "↓")}", stockModel.IsUp ? StockColor.Red : StockColor.Green);
                     }
                 });
             }
@@ -83,13 +98,13 @@ namespace StockWatcher
             switch (color)
             {
                 case StockColor.Green:
-                    labelForStatus.ForeColor = Color.FromArgb(0, 255, 0);
+                    labelForStatus.ForeColor = Color.FromArgb(34, 55, 60);
                     break;
                 case StockColor.Red:
-                    labelForStatus.ForeColor = Color.Red;
+                    labelForStatus.ForeColor = Color.FromArgb(102, 28, 32);
                     break;
                 case StockColor.Disabled:
-                    labelForStatus.ForeColor = Color.White;
+                    labelForStatus.ForeColor = Color.Black;
                     labelForStatus.Tag = null;
                     break;
             }
@@ -180,11 +195,24 @@ namespace StockWatcher
         {
             if (labelForStatus.Tag != null && labelForStatus.Tag is StockModel model)
             {
+                var percent = model.PricePercent;
+                float changeAmount;
+                if (Math.Abs(100f + percent) < 0.0001f)
+                {
+                    changeAmount = 0f;
+                }
+                else
+                {
+                    var prevClose = model.CurrentPrice / (1 + percent / 100f);
+                    changeAmount = model.CurrentPrice - prevClose;
+                }
+                var changeText = $"{(changeAmount > 0 ? "+" : "")}{changeAmount.ToString("F2")}";
+                var percentText = $"{(percent > 0 ? "+" : "")}{percent.ToString("F2")}%";
                 Util.Info(
                     $"代码：{model.Code}\r\n" +
                     $"名称：{model.Name}\r\n" +
-                    $"现价：{model.CurrentPrice}\r\n" +
-                    $"涨跌：{model.PricePercent}"
+                    $"现价：{model.CurrentPrice.ToString("F2")}\r\n" +
+                    $"涨跌：{changeText} ({percentText})"
                 , "查看详情");
             }
         }
