@@ -98,7 +98,7 @@ namespace StockWatcher
             switch (color)
             {
                 case StockColor.Green:
-                    labelForStatus.ForeColor = Color.FromArgb(34, 55, 60);
+                    labelForStatus.ForeColor = Color.FromArgb(40, 62, 68);
                     break;
                 case StockColor.Red:
                     labelForStatus.ForeColor = Color.FromArgb(102, 28, 32);
